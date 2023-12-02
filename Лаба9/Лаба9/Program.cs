@@ -47,7 +47,7 @@ class Triangle : Shape, IRotatable
     }
 }
 
-class Circle : Shape, IRotatable
+class Circle : Shape
 {
     private double radius;
 
@@ -69,11 +69,6 @@ class Circle : Shape, IRotatable
     public override double CalculateArea()
     {
         return Math.PI * Math.Pow(radius, 2);
-    }
-
-    public void Rotate()
-    {
-        Console.WriteLine("Окружность вращается.");
     }
 }
 
@@ -154,7 +149,6 @@ class Program
         Console.WriteLine("\nПериметр фигуры: " + shape.CalculatePerimeter());
         Console.WriteLine("Площадь фигуры: " + shape.CalculateArea());
 
-        Console.WriteLine("\nВращение фигуры:");
         if (shape is IRotatable rotatableShape)
         {
             rotatableShape.Rotate();
