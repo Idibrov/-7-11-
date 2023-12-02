@@ -1,17 +1,18 @@
 ﻿using System;
 
+interface IRotatable
+{
+    void Rotate();
+}
+
 abstract class Shape
 {
     public abstract void DisplayInfo();
     public abstract double CalculatePerimeter();
     public abstract double CalculateArea();
-    public virtual void Rotate()
-    {
-        Console.WriteLine("Фигура вращается.");
-    }
 }
 
-class Triangle : Shape
+class Triangle : Shape, IRotatable
 {
     private double sideA;
     private double sideB;
@@ -39,9 +40,14 @@ class Triangle : Shape
         double s = CalculatePerimeter() / 2;
         return Math.Sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
     }
+
+    public void Rotate()
+    {
+        Console.WriteLine("Треугольник вращается.");
+    }
 }
 
-class Circle : Shape
+class Circle : Shape, IRotatable
 {
     private double radius;
 
@@ -64,9 +70,14 @@ class Circle : Shape
     {
         return Math.PI * Math.Pow(radius, 2);
     }
+
+    public void Rotate()
+    {
+        Console.WriteLine("Окружность вращается.");
+    }
 }
 
-class Square : Shape
+class Square : Shape, IRotatable
 {
     private double side;
 
@@ -90,9 +101,9 @@ class Square : Shape
         return Math.Pow(side, 2);
     }
 
-    public override void Rotate()
+    public void Rotate()
     {
-        Console.WriteLine("Квадрат вращается вокруг своего центра.");
+        Console.WriteLine("Квадрат вращается.");
     }
 }
 
@@ -144,6 +155,9 @@ class Program
         Console.WriteLine("Площадь фигуры: " + shape.CalculateArea());
 
         Console.WriteLine("\nВращение фигуры:");
-        shape.Rotate();
+        if (shape is IRotatable rotatableShape)
+        {
+            rotatableShape.Rotate();
+        }
     }
 }
